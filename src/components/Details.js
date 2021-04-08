@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+
+import { AppState } from "../App";
 
 export default function Details() {
   const [userId, setUserId] = useState("");
+  const { setIsLoggedIn } = useContext(AppState);
 
   useEffect(() => {
     void (async function () {
@@ -13,6 +16,7 @@ export default function Details() {
       const data = await response.json();
 
       setUserId(data.user);
+      setIsLoggedIn(true);
     })();
   }, []);
 

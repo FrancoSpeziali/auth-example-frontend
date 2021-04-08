@@ -1,4 +1,12 @@
+import { useContext } from "react";
+
+import { useHistory } from "react-router-dom";
+
+import { AppState } from "../App";
+
 export default function Login() {
+  const { isLoggedIn, setIsLoggedIn } = useContext(AppState);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -20,16 +28,25 @@ export default function Login() {
         password,
       }),
     });
+
+    window.localStorage.setItem("isLoggedIn", "isLoggedIn");
+    setIsLoggedIn(true);
   };
 
   return (
     <>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input name="email" type="email"></input>
-        <input name="password" type="password"></input>
-        <button type="submit">Login</button>
-      </form>
+      {isLoggedIn ? (
+        <p>User already logged in</p>
+      ) : (
+        <>
+          <h1>Login</h1>
+          <form onSubmit={handleSubmit}>
+            <input name="email" type="email"></input>
+            <input name="password" type="password"></input>
+            <button type="submit">Login</button>
+          </form>
+        </>
+      )}
     </>
   );
 }
