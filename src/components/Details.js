@@ -8,15 +8,18 @@ export default function Details() {
 
   useEffect(() => {
     void (async function () {
+      const token = window.localStorage.getItem("token");
+
       const response = await fetch("http://localhost:3002/user/details", {
         method: "GET",
-        credentials: "include",
+        headers: new Headers({
+          Authorization: `Bearer ${token}`,
+        }),
       });
 
       const data = await response.json();
 
       setUserId(data.user);
-      setIsLoggedIn(true);
     })();
   }, []);
 

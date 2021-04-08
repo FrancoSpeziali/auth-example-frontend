@@ -20,16 +20,15 @@ export default function Login() {
       headers: {
         "Content-Type": "application/json",
       },
-      // store the httpOnly cookie
-      // or send the httpOnly cookie
-      credentials: "include", // only for httpOnly cookie - frontend is expecting a httpOnly cookie
       body: JSON.stringify({
         email,
         password,
       }),
     });
 
+    const data = await response.json();
     window.localStorage.setItem("isLoggedIn", "isLoggedIn");
+    window.localStorage.setItem("token", data.token);
     setIsLoggedIn(true);
   };
 

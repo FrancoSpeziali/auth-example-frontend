@@ -7,11 +7,8 @@ export default function Navigation() {
 
   const handleLogout = async () => {
     window.localStorage.removeItem("isLoggedIn");
+    window.localStorage.removeItem("token");
     setIsLoggedIn(false);
-    const response = await fetch("http://localhost:3002/user/logout", {
-      method: "GET",
-      credentials: "include",
-    });
   };
 
   return (

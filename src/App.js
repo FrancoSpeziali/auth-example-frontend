@@ -4,7 +4,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Details from "./components/Details";
 import Navigation from "./components/Nav";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export const AppState = createContext();
 
@@ -23,9 +24,11 @@ function App() {
       <div className="App">
         <Router>
           <Navigation />
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
-          <Route path="/details" exact component={Details} />
+          <Switch>
+            <Route path="/login" exact component={Login} />
+            <Route path="/register" exact component={Register} />
+            <ProtectedRoute path="/details" exact component={Details} />
+          </Switch>
         </Router>
       </div>
     </AppState.Provider>
